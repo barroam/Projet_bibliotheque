@@ -16,5 +16,16 @@ class Livre extends Model
             'disponible',
             'image',
             'description',
+            'categorie_id',
+            'rayon_id',
     ];
+
+   public function categorie():BelongsTo{
+        return $this->belongsTo(Categorie::class);
+   }
+   public function rayon():BelongsTo{
+    return $this->belongsTo(Rayon::class);
+}
+
+
 }

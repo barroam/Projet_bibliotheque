@@ -12,4 +12,9 @@ class Categorie extends Model
         'libelle',
         'description',
 ];
+
+public function livre():HasMany
+{
+ return $this->hasMany(Livre::class);
+}
 }

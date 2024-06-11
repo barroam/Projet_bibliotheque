@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Http\Request;
-use \App\Models\Livre;
 use App\Models\Rayon;
+use \App\Models\Livre;
 use App\Models\Categorie;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LivreController extends Controller
 {
     //la fonction pour afficher la page d'accueil
     public function accueil (){
-        return view ('livres.index');
+        $livres = Livre::all();
+        $categories = Categorie::all();
+         $rayons = Rayon::all();
+        return view ('livres.index',compact('categories','rayons','livres'));
     }
 
     //la fonction pour afficher la page profil de l'administrateur
@@ -29,6 +33,13 @@ class LivreController extends Controller
         return view ('/livres.profil',compact('categories','rayons','livres'));
        }
 
+    public function affiche_livres(){
+        $livres = Livre::all();
+           $categories = Categorie::all();
+            $rayons = Rayon::all();
+            return view ('/livres.livre',compact('categories','rayons','livres'));
+           }
+
     public function Ajouter_livres(Request $request){
         $request->validate([
 
@@ -41,12 +52,12 @@ class LivreController extends Controller
             'description' => 'required|string',
 
         ]);
-        $disponible = $request->disponible === 'disponible' ? 'disponible' : 'emprunté';
+        $disponible = $request->disponible == 'disponible' ? 'disponible' : 'emprunté';
         $request['disponible'] = $disponible;
 
         $livres = Livre::create($request->all());
 
-        return redirect ('profil');
+        return redirect ('profil')->with('status', 'Ajouter avec succès.');
     }
 
     //la  methode pour afficher la modification
@@ -69,14 +80,14 @@ class LivreController extends Controller
             'description' => 'required|string',
 
         ]);
-        $disponible = $request->disponible === 'disponible' ? 'disponible' : 'emprunté';
+        $disponible = $request->disponible == 'disponible' ? 'disponible' : 'emprunté';
         $request['disponible'] = $disponible;
         $livre = Livre::find($id);
         $livre->update($request->all());
 
         return redirect ('profil');
     }
-    //la route pour la suppression 
+    //la route pour la suppression
     public function supprime_livres($id){
         $livre = Livre::findorfail($id);
         $livre->delete();

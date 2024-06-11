@@ -9,6 +9,11 @@ use App\Models\Rayon;
 
 class RayonController extends Controller
 {
+    public function affiche_rayons (){
+
+            $rayons = Rayon::all();
+            return view ('/livres.rayon',compact('rayons',));
+           }
     // la methode pour ajouter un Rayon
     public function ajouter_rayons( Request $request){
        //la validation de l'ajout
@@ -39,7 +44,7 @@ class RayonController extends Controller
         $rayon->libelle = $request->libelle ;
         $rayon->partie = $request->partie ;
         $rayon->update();
-    return redirect('profil');
+    return redirect('/rayon');
 }
 
   public function supprime_rayons ($id){

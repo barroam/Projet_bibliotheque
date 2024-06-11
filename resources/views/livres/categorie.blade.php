@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -33,8 +29,8 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom" style="border-bottom:solid #3b2a1a; position: fixed; display: flex; width: 100%; z-index: 1000; top: 0;" >
-        <a class="navbar-brand" style="color: #3b2a1a; font-weight: 600 ;margin-top:0; " href="#">Livram</a>
+    <nav class="navbar navbar-expand-lg navbar-custom" style="border-bottom:solid #3b2a1a; position: fixed; display: flex; width: 100%; z-index: 1000; " >
+        <a class="navbar-brand" style="color: #3b2a1a; font-weight: 600 ; " href="#">Livram</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -72,58 +68,46 @@
           @endif
         </div>
     </nav>
-    <div style="position: relative; width: 100%; height: 0; padding-top: 33.3333%;
-    padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
-     will-change: transform;">
-     <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-       src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGHzLu0rBI&#x2F;zbocI5REj7mK9CJ1R4JuIQ&#x2F;view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-     </iframe>
-   </div>
-
    <div class="container d-flex flex-wrap" >
 
     <div class="container col-12 " style="margin-top:5.2rem; ">
-        @foreach ($livres as $livre)
-        <div class="card mt-3 border-0 shadow " style="background-color: #f5f5dc;">
-            <div class="row g-0">
-                <div class="col-md-5">
-                    <img src="{{$livre->image}}" class="img-fluid rounded-start" alt="{{$livre->titre}}">
-                </div>
-                <div class="col-md-7">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">{{$livre->titre}}</h5>
-                        <span class="badge bg-dark text-light">{{$livre->disponible }}</span>
-                        <hr class="my-2">
-                        <p class="card-text"><strong>ISBN:</strong> {{$livre->isbn}}</p>
-                        <p class="card-text"><strong>Auteur:</strong> {{$livre->auteur}}</p>
-                        <p class="card-text"><strong>Editeur:</strong> {{$livre->editeur}}</p>
+        <style>
+            .custom-title {
+                font-family: 'Arial', sans-serif;
+                color: #3b2a1a; /* Marron foncé */
+                text-align: center;
+                margin-bottom: 30px;
+                padding: 10px;
+                border-bottom: 2px solid #5a4a3b; /* Ligne sous le titre */
+                display: inline-block;
+            }
+        </style>
 
-                        @foreach($categories as $categorie)
-                        @if($categorie->id == $livre->categorie_id)
-                            <p class="card-text"><strong>Catégorie:</strong> {{$categorie->libelle }}</p>
-                        @endif
-                        @endforeach
-                        @foreach($rayons as $rayon)
-                        @if($rayon->id == $livre->rayon_id)
-                            <p class="card-text"><strong>Rayon:</strong> {{$rayon->libelle}}</p>
-                        @endif
-                        @endforeach
-                        <hr class="my-2">
+
+
+
+
+
+
+                <h1 class="custom-title">Catégories</h1>
+                <div class="row">
+                    @foreach ($categories as $categorie)
+                    <div class="col-md-4">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ $categorie->libelle }}</h4>
+                                <p class="card-text">{{ $categorie->description }}</p>
+                            </div>
+                            <div class="card-footer">
+                                @if (Auth::check())
+                                <a href="/modifie_C/{{ $categorie->id }}" class="btn btn-sm">Modifier</a>
+                                <a href="/supprime_C/{{ $categorie->id }}" class="btn btn-sm">Supprimer</a>
+                                @endif
+                            </div>
+                        </div>
                     </div>
+                    @endforeach
                 </div>
-            </div>
-            <div class=" m-2">
-                <p class="card-text">{{$livre->description}}</p>
-            </div>
-
-
-        </div>
-        @endforeach
-
-
-
-
-   </div>
 
 
 

@@ -36,16 +36,19 @@ class CategorieController extends Controller
    public function sauvegarde_modife_categories (Request $request ,$id) {
    $categorie = Categorie::find($id);
     $categorie->update($request->all());
-    return redirect('/profil');
+    return redirect('/categorie');
    }
 
    //la methode pour supprimer une categorie
    public function supprime_categories($id){
      $categorie = Categorie::find($id);
      $categorie->delete();
-     return redirect('profil');
+     return redirect('/categorie');
    }
-
+    public function affiche_categories(){
+        $categories = Categorie::all();
+        return view ('/livres.categorie',compact('categories',));
+    }
 
 
 

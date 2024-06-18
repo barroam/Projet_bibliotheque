@@ -15,7 +15,7 @@ class CategorieController extends Controller
         ]);
 
         $categories = Categorie::create($request->all());
-        return redirect ('profil');
+        return redirect ('categorie');
     }
    // la methode pour affiche la vue modification et son id
     public function modifie_categories($id){

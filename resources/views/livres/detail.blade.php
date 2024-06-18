@@ -55,13 +55,9 @@
     </nav>
 
    <div class="container d-flex flex-wrap" >
-    @if(session('livre'))
-    <div class="alert alert-success">
-        {{ session('livre') }}
-    </div>
-    @endif
+
     <div class="container col-12 " style="margin-top:5.2rem; ">
-        @foreach ($livres as $livre)
+
         <div class="card mt-3 border-0 shadow " style="background-color: #f5f5dc;">
             <div class="row g-0">
                 <div class="col-md-5">
@@ -76,16 +72,15 @@
                         <p class="card-text"><strong>Auteur:</strong> {{$livre->auteur}}</p>
                         <p class="card-text"><strong>Editeur:</strong> {{$livre->editeur}}</p>
 
-                        @foreach($categories as $categorie)
-                        @if($categorie->id == $livre->categorie_id)
-                            <p class="card-text"><strong>Catégorie:</strong> {{$categorie->libelle }}</p>
-                        @endif
-                        @endforeach
-                        @foreach($rayons as $rayon)
-                        @if($rayon->id == $livre->rayon_id)
-                            <p class="card-text"><strong>Rayon:</strong> {{$rayon->libelle}}</p>
-                        @endif
-                        @endforeach
+
+
+                            <p class="card-text"><strong>Catégorie:</strong> {{$livre->categorie->libelle }}</p>
+
+
+
+                            <p class="card-text"><strong>Rayon:</strong> {{$livre->rayon->libelle}}</p>
+
+
                         <hr class="my-2">
                     </div>
                 </div>
@@ -93,15 +88,10 @@
             <div class=" m-2">
                 <p class="card-text">{{$livre->description}}</p>
             </div>
-            <div class="card-footer">
-                @if (Auth::check())
-                <a href="/livre_modifie/{{$livre->id}}" class="btn btn-dark">Modifier</a>
-                <a href="/supprime_L/{{$livre->id}}" class="btn btn-dark">Supprimer</a>
-                @endif
-            </div>
+            
 
         </div>
-        @endforeach
+
 
 
 

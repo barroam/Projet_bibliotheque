@@ -16,14 +16,26 @@ class RayonController extends Controller
            }
     // la methode pour ajouter un Rayon
     public function ajouter_rayons( Request $request){
-       //la validation de l'ajout
+            // Définition des messages de validation personnalisés par attribut
+    $messages = [
+        'id.exists' => 'Le rayon sélectionné n\'existe pas.',
+
+        'libelle.required' => 'Le champ Libellé est requis.',
+        'libelle.string' => 'Le champ Libellé doit être une chaîne de caractères.',
+        'libelle.max' => 'Le champ Libellé ne peut pas dépasser :max caractères.',
+
+        'partie.required' => 'Le champ Partie est requis.',
+        'partie.string' => 'Le champ Partie doit être une chaîne de caractères.',
+        'partie.max' => 'Le champ Partie ne peut pas dépasser :max caractères.',
+    ];
+        //la validation de l'ajout
         $request->validate([
             'id' => 'nullable|exists:rayons,id',
             'libelle' => 'required|string|max:255',
             'partie' => 'required|string|max:255',
-        ]);
+        ],$messages);
   $rayons = Rayon::create($request->all());
-   return redirect ('/profil');
+   return redirect ('/rayon');
     }
 
     //la methode pour modifier un rayon
@@ -50,7 +62,7 @@ class RayonController extends Controller
   public function supprime_rayons ($id){
           $rayon = Rayon::find($id);
           $rayon->delete();
-     return redirect ('profil');
+     return redirect ('/rayon');
   }
 
 

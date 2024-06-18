@@ -92,16 +92,28 @@
         </li>
     </ul>
 </div>
+
     <!-- conteneur element-->
 <div class="box2">
-
+    @if ($errors->any())
+    <div class="alert text-light" style="display: flex;position:fixed;z-index:1000; width:70%; background:#3b2a1acf;
+    " >
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="container col-6 border border-secondary-subtle p-2">
         <div class="custom-div">
             <h5>Ajouter un livre</h5>
-
         </div>
 <br>
+
+
                         <form action="/sauvegarde_livre" method="POST" class="container ">
+
                             @csrf
                             <div class="d-flex justify-content-between gap-1">
                                 <div class="form-group">
@@ -175,6 +187,7 @@
         <!-- Formulaire pour ajouter une catégorie -->
         <form action="/ajout/sauvegarde_categorie" method="post">
             @csrf
+
             <div class="form-group">
                 <label for="libelle">Nom du Catégorie</label>
                 <input type="text" class="form-control" name="libelle" id="libelle" placeholder="Entrez le nom de la catégorie">
@@ -201,6 +214,11 @@
                 @csrf
                 <div class="form-group">
                     <label for="libelle">Nom du Rayon</label>
+                    @if(session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
                     <input type="text" class="form-control" name="libelle" id="libelle" placeholder="Entrez le nom du rayon">
                 </div>
                 <div class="form-group">

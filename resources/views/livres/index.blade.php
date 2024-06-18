@@ -11,8 +11,12 @@
     <title>Document</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Lien vers FontAwesome pour les icônes -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        body{
+            background-color: #f5f5dc;
+        }
         .navbar-custom {
             background-color: #f5f5dc;
         }
@@ -72,64 +76,90 @@
           @endif
         </div>
     </nav>
-    <div style="position: relative; width: 100%; height: 0; padding-top: 33.3333%;
-    padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
-     will-change: transform;">
-     <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-       src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGHzLu0rBI&#x2F;zbocI5REj7mK9CJ1R4JuIQ&#x2F;view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-     </iframe>
-   </div>
+    <!-- la banierre -->
+    <div class="jumbotron jumbotron-fluid text-center banner" style="background-color: #5a4a3b; margin-top:3.6rem;">
+        <div class="container">
+            <h1 style="color: #f5f5dc;" >Bienvenue au dans Livram</h1>
+            <p class="lead" style="color: #f5f5dc;">Explorez une vaste collection de livres et trouvez vos prochains favoris.</p>
+        </div>
+    </div>
+<!-- la partie du livre -->
 
-   <div class="container d-flex flex-wrap" >
+    <div id="livres" class="container-fluid my-5 py-5 ">
+        <h2 class="text-center">Livres</h2>
+        <div class="container">
 
-    <div class="container col-12 " style="margin-top:5.2rem; ">
-        @foreach ($livres as $livre)
-        <div class="card mt-3 border-0 shadow " style="background-color: #f5f5dc;">
-            <div class="row g-0">
-                <div class="col-md-5">
-                    <img src="{{$livre->image}}" class="img-fluid rounded-start" alt="{{$livre->titre}}">
-                </div>
-                <div class="col-md-7">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">{{$livre->titre}}</h5>
-                        <span class="badge bg-dark text-light">{{$livre->disponible }}</span>
-                        <hr class="my-2">
-                        <p class="card-text"><strong>ISBN:</strong> {{$livre->isbn}}</p>
-                        <p class="card-text"><strong>Auteur:</strong> {{$livre->auteur}}</p>
-                        <p class="card-text"><strong>Editeur:</strong> {{$livre->editeur}}</p>
+            <div class="row text-center " style="display: flex; flex-wrap: wrap; gap:2rem;" >
+                @foreach ($livres as $livre)
 
-                        @foreach($categories as $categorie)
-                        @if($categorie->id == $livre->categorie_id)
-                            <p class="card-text"><strong>Catégorie:</strong> {{$categorie->libelle }}</p>
-                        @endif
-                        @endforeach
-                        @foreach($rayons as $rayon)
-                        @if($rayon->id == $livre->rayon_id)
-                            <p class="card-text"><strong>Rayon:</strong> {{$rayon->libelle}}</p>
-                        @endif
-                        @endforeach
-                        <hr class="my-2">
+                <div  style= "width: 22.1rem; height: 24.5rem;" >
+                    <div class="card h-100" style="backgrounf:#f5f5dc;">
+                        <img style="width: 22rem; height: 15rem; object-fit:cover; backgrounf:#f5f5dc;" src="{{$livre->image}}"  alt="Book 3">
+                        <span class="badge rounded-1 text-light "style="position: relative; font-size:1rem;  display:flex; justify-self: start; margin:-1.8rem 1rem 1rem 0.5rem; background-color:#5a4a3b; padding: 0.2rem 0.5rem; height: auto; width: 6rem;" >{{$livre->disponible}}</span>
+                        <div class="card-body" style="">
+                            <h5 class="card-title">{{$livre->titre}}</h5>
+                            <p class="card-text">{{$livre->description}} </p>
+                            <a href="/details/{{$livre->id}}"> <i class="fa-solid fa-circle-info" style="z-index: 1000; color:#3b2a1a;font-size:2rem; float: right;"></i></a>
+
+                        </div>
                     </div>
+
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    <!-- le partie des catégories -->
+    <h2 class="text-center">Catégories</h2>
+    <div class="container">
+    <div class="container-fluid my-5 py-5" style="display: flex; flex-wrap: wrap; gap:2rem; align-items:center;" >
+        @foreach ($categories as $categorie)
+        <div class="" style="width: 21rem; ">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h4 class="card-title">{{ $categorie->libelle }}</h4>
+                    <p class="card-text">{{ $categorie->description }}</p>
                 </div>
             </div>
-            <div class=" m-2">
-                <p class="card-text">{{$livre->description}}</p>
-            </div>
-
-
         </div>
         @endforeach
-
-
-
-
+    </div>
    </div>
 
+       <!-- le partie des catégories -->
+       <h2 class="text-center">Rayons</h2>
+       <div class="container">
+       <div class="container-fluid my-5 py-5" style="display: flex; flex-wrap: wrap; gap:2rem; align-items:center;" >
+           @foreach ($rayons as $rayon)
+           <div class="" style="width: 21rem; ">
+               <div class="card custom-card">
+                   <div class="card-body">
+                       <h4 class="card-title">{{ $rayon->libelle }}</h4>
+                       <p class="card-text">{{ $rayon->partie }}</p>
+                   </div>
+               </div>
+           </div>
+           @endforeach
+       </div>
+      </div>
 
 
 
-
+   <div style="position: relative; width: 100%; height: 0; padding-top: 33.3333%;
+   padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);overflow: hidden;
+    will-change: transform;">
+    <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+      src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGHzLu0rBI&#x2F;zbocI5REj7mK9CJ1R4JuIQ&#x2F;view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+    </iframe>
+  </div>
    </div>
+
+   <div class="" style="text-align: center; background:#3b2a1a; color:#f5f5dc;padding:0.8rem;">
+    <p>&copy; 2024 Livram Tous droits réservés.</p>
+    <h6 style="color: rgb(183, 176, 176);">by M<span style="color:#f5f5dc;">BARRO</span>DI</h6>
+
+</div>
    <style>
     .custom-title {
         font-family: 'Arial', sans-serif;
@@ -141,7 +171,8 @@
         display: inline-block;
     }
     .custom-card {
-        background-color: #f5f5dc; /* Couleur de fond beige */
+
+        background-color:#fff; /* Couleur de fond beige */
         color: #5a4a3b; /* Texte en marron foncé */
         border: 1px solid #e0e0e0;
         border-radius: 10px;

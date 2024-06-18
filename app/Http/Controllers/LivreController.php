@@ -41,6 +41,35 @@ class LivreController extends Controller
            }
 
     public function Ajouter_livres(Request $request){
+        $messages = [
+            'titre.required' => 'Le champ Titre est requis.',
+            'titre.string' => 'Le champ Titre doit être une chaîne de caractères.',
+            'titre.max' => 'Le champ Titre ne peut pas dépasser :max caractères.',
+
+            'isbn.required' => 'Le champ ISBN est requis.',
+            'isbn.string' => 'Le champ ISBN doit être une chaîne de caractères.',
+            'isbn.max' => 'Le champ ISBN ne peut pas dépasser :max caractères.',
+
+            'auteur.required' => 'Le champ Auteur est requis.',
+            'auteur.string' => 'Le champ Auteur doit être une chaîne de caractères.',
+            'auteur.max' => 'Le champ Auteur ne peut pas dépasser :max caractères.',
+
+            'editeur.required' => 'Le champ Éditeur est requis.',
+            'editeur.string' => 'Le champ Éditeur doit être une chaîne de caractères.',
+            'editeur.max' => 'Le champ Éditeur ne peut pas dépasser :max caractères.',
+
+            'description.required' => 'Le champ Description est requis.',
+            'description.string' => 'Le champ Description doit être une chaîne de caractères.',
+
+            'image.string' => 'Le champ Image doit être une chaîne de caractères.',
+
+            'rayon_id.required' => 'Le champ Rayon est requis.',
+            'rayon_id.exists' => 'La sélection pour le champ Rayon n\'est pas valide.',
+
+            'categorie_id.required' => 'Le champ Catégorie est requis.',
+            'categorie_id.exists' => 'La sélection pour le champ Catégorie n\'est pas valide.'
+        ];
+
         $request->validate([
 
             'titre' => 'required|string',
@@ -51,13 +80,14 @@ class LivreController extends Controller
             'image' => 'required|string',
             'description' => 'required|string',
 
-        ]);
+        ],$messages);
+
         $disponible = $request->disponible == 'disponible' ? 'disponible' : 'emprunté';
         $request['disponible'] = $disponible;
 
         $livres = Livre::create($request->all());
 
-        return redirect ('profil')->with('status', 'Ajouter avec succès.');
+        return redirect ('livre')->with('livre', 'Ajouter avec succès.');
     }
 
     //la  methode pour afficher la modification
@@ -85,15 +115,29 @@ class LivreController extends Controller
         $livre = Livre::find($id);
         $livre->update($request->all());
 
-        return redirect ('profil');
+        return redirect ('livre');
     }
-    //la route pour la suppression
+    //la methode  pour la suppression
     public function supprime_livres($id){
         $livre = Livre::findorfail($id);
         $livre->delete();
          return redirect()->back();
 
     }
+    // la methode pour affiche le details d'un livre
+    public function affiche_details($id){
+       // $livre = Livre::find($id)->get();;
+       // $categorie = Categorie::find($id);
+       // $livre=$categorie;
+       // $rayon = Rayon::find($id);
+      //  $livre=$rayon;
+
+
+      $livre = Livre::with(['categorie', 'rayon'])->find($id);
+      return view('livres.detail', compact('livre'));
+           }
+
+
 
 
 

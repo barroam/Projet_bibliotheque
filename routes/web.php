@@ -24,7 +24,8 @@ use App\Http\Controllers\CategorieController;
     Route::get('/supprime_L/{id}',[LivreController::class,'supprime_livres'])->middleware('auth');
     //la route pour affiche les livres
     Route::get('/livre',[LivreController::class,'affiche_livres']);
-
+    //la route pour la page details
+    Route::get('/details/{id}',[LivreController::class,'affiche_details']);
 
     //CATEGORIE
     //la route pour ajouter catégorie
@@ -54,7 +55,7 @@ use App\Http\Controllers\CategorieController;
  //la route de l'enregistrement d'un admin
  Route::get('/register',[AuthController::class,'register'])->name('register');
 
- Route::post('/register',[AuthController::class,'registerPost'])->name('register');
+ Route::post('/register',[AuthController::class,'registerPost'])->name('registers');
 
  Route::get('/login',[AuthController::class,'login'])->name('login');
 

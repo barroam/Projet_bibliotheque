@@ -91,14 +91,14 @@
 
             <div class="row text-center " style="display: flex; flex-wrap: wrap; gap:2rem;" >
                 @foreach ($livres as $livre)
-
-                <div  style= "width: 22.1rem; height: 24.5rem;" >
+                <div  style= "width: 22.1rem; height: 26.5rem;" >
                     <div class="card h-100" style="backgrounf:#f5f5dc;">
                         <img style="width: 22rem; height: 15rem; object-fit:cover; backgrounf:#f5f5dc;" src="{{$livre->image}}"  alt="Book 3">
                         <span class="badge rounded-1 text-light "style="position: relative; font-size:1rem;  display:flex; justify-self: start; margin:-1.8rem 1rem 1rem 0.5rem; background-color:#5a4a3b; padding: 0.2rem 0.5rem; height: auto; width: 6rem;" >{{$livre->disponible}}</span>
                         <div class="card-body" style="">
                             <h5 class="card-title">{{$livre->titre}}</h5>
-                            <p class="card-text">{{$livre->description}} </p>
+
+                            <p>{{ Illuminate\Support\Str::limit($livre['description'], 70) }}</p>
                             <a href="/details/{{$livre->id}}"> <i class="fa-solid fa-circle-info" style="z-index: 1000; color:#3b2a1a;font-size:2rem; float: right;"></i></a>
 
                         </div>

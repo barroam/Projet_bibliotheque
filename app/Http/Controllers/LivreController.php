@@ -97,7 +97,6 @@ class LivreController extends Controller
         $rayons = Rayon::all();
         return view('/livres/modif-livre',compact('livre','categories', 'rayons'));
     }
-
     //la methode pour sauvegarder le modifications d'un livre
     public function sauvegarde_modifie_livres(Request $request , $id){
         $request->validate([
@@ -108,7 +107,6 @@ class LivreController extends Controller
          'disponible' => 'nullable',
            'image' => 'required|string',
             'description' => 'required|string',
-
         ]);
         $disponible = $request->disponible == 'disponible' ? 'disponible' : 'emprunté';
         $request['disponible'] = $disponible;
@@ -122,7 +120,6 @@ class LivreController extends Controller
         $livre = Livre::findorfail($id);
         $livre->delete();
          return redirect()->back();
-
     }
     // la methode pour affiche le details d'un livre
     public function affiche_details($id){
@@ -131,14 +128,7 @@ class LivreController extends Controller
        // $livre=$categorie;
        // $rayon = Rayon::find($id);
       //  $livre=$rayon;
-
-
       $livre = Livre::with(['categorie', 'rayon'])->find($id);
       return view('livres.detail', compact('livre'));
            }
-
-
-
-
-
 }

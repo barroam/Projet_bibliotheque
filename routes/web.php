@@ -52,6 +52,7 @@ use App\Http\Controllers\CategorieController;
   //la route pour afficher rayon
    Route::get('/rayon',[RayonController::class,'affiche_rayons']);
 
+   
  //la route de l'enregistrement d'un admin
  Route::get('/register',[AuthController::class,'register'])->name('register');
 

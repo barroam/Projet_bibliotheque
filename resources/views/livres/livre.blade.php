@@ -67,7 +67,7 @@
                 <div class="col-md-5">
                     <img src="{{$livre->image}}" class="img-fluid rounded-start" alt="{{$livre->titre}}">
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7" style="font-size: 1.25rem">
                     <div class="card-body">
                         <h5 class="card-title mb-0">{{$livre->titre}}</h5>
                         <span class="badge bg-dark text-light">{{$livre->disponible }}</span>
@@ -75,7 +75,6 @@
                         <p class="card-text"><strong>ISBN:</strong> {{$livre->isbn}}</p>
                         <p class="card-text"><strong>Auteur:</strong> {{$livre->auteur}}</p>
                         <p class="card-text"><strong>Editeur:</strong> {{$livre->editeur}}</p>
-
                         @foreach($categories as $categorie)
                         @if($categorie->id == $livre->categorie_id)
                             <p class="card-text"><strong>Catégorie:</strong> {{$categorie->libelle }}</p>
@@ -91,7 +90,7 @@
                 </div>
             </div>
             <div class=" m-2">
-                <p class="card-text">{{$livre->description}}</p>
+                <p style="margin: 1.3rem; font-size:1.5rem;">{{ Illuminate\Support\Str::limit($livre['description'], 200) }}</p>
             </div>
             <div class="card-footer">
                 @if (Auth::check())
@@ -99,13 +98,8 @@
                 <a href="/supprime_L/{{$livre->id}}" class="btn btn-dark">Supprimer</a>
                 @endif
             </div>
-
         </div>
         @endforeach
-
-
-
-
    </div>
 
 <style>

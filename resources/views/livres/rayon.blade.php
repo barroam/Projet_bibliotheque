@@ -86,13 +86,6 @@
                 display: inline-block;
             }
         </style>
-
-
-
-
-
-
-
                 <h1 class="custom-title">Rayons</h1>
                 <div class="row">
                     @foreach ($rayons as $rayon)

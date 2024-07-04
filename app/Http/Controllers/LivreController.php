@@ -131,4 +131,16 @@ class LivreController extends Controller
       $livre = Livre::with(['categorie', 'rayon'])->find($id);
       return view('livres.detail', compact('livre'));
            }
+
+           public function search(Request $request)
+           {
+               $query = $request->input('query');
+
+               $livres = Livre::where('titre', 'like', "%$query%")
+                              ->orWhere('auteur', 'like', "%$query%")
+                              ->get();
+
+               return view('livres.search', compact('livres', 'query'));
+           }
+
 }

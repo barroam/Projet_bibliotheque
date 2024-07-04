@@ -85,13 +85,13 @@
 
 
         </div>
-
-
-
-
-
    </div>
+</div>
+   <div class="" style="text-align: center; background:#3b2a1a; color:#f5f5dc;padding:0.8rem; margin-top:5rem;">
+    <p>&copy; 2024 Livram Tous droits réservés.</p>
+    <h6 style="color: rgb(183, 176, 176);">by M<span style="color:#f5f5dc;">BARRO</span>DI</h6>
 
+</div>
 <style>
      .custom-card {
             background-color: #f5f5dc; /* Couleur de fond beige */

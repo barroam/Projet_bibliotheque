@@ -15,7 +15,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body{
-            background-color: #f5f5dc;
+            background-color: #fff;
         }
         .navbar-custom {
             background-color: #f5f5dc;
@@ -37,17 +37,19 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom" style="border-bottom:solid #3b2a1a; position: fixed; display: flex; width: 100%; z-index: 1000; top: 0;" >
-        <a class="navbar-brand" style="color: #3b2a1a; font-weight: 600 ;margin-top:0; " href="#">Livram</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-custom" style="border-bottom:solid #3b2a1a;">
+        <a class="navbar-brand" style="color: #3b2a1a; font-weight: 600;" href="#">Livram</a>
+
+        <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Accueil</a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" href="/livre">Livres</a>
                 </li>
@@ -66,39 +68,52 @@
             @if (Auth::guest())
             <a class="btn btn-dark ml-3" href="/login">Connexion</a>
             @endif
-
             @if(Auth::check())
-            <form action="{{route('logout')}}" method="POST" role="search">
+            <form action="{{route('logout')}}" method="POST" class="ml-3">
             @csrf
             @method('DELETE')
-            <button class="btn btn-dark ml-3" type="submit" >Deconnexion</button>
+            <button class="btn btn-dark" type="submit">Déconnexion</button>
             </form>
-          @endif
+            @endif
+
+        </div>
         </div>
     </nav>
+
+
+    <form action="{{ route('search') }}" method="GET" class="col-4 d-flex justify-content-end p-2  " style="float:right ; gap:0.3rem;">
+        <input class="form-control  search-input" type="search" placeholder="Rechercher" aria-label="Search" name="query" required>
+        <button class="btn " style="background-color: #f5f5dc" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
     <!-- la banierre -->
-    <div class="jumbotron jumbotron-fluid text-center banner" style="background-color: #5a4a3b; margin-top:3.6rem;">
-        <div class="container">
-            <h1 style="color: #f5f5dc;" >Bienvenue au dans Livram</h1>
-            <p class="lead" style="color: #f5f5dc;">Explorez une vaste collection de livres et trouvez vos prochains favoris.</p>
-        </div>
+    <div class="jumbotron jumbotron-fluid text-center banner" style="background-color: #5a4a3b;border-bottom:none; ">
+
+        <div style="position: relative; width: 100%; height: 0; padding-top: 33.3333%;
+        padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);overflow: hidden;
+         will-change: transform;">
+         <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+           src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGHzLu0rBI&#x2F;zbocI5REj7mK9CJ1R4JuIQ&#x2F;view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+         </iframe>
+       </div>
+
     </div>
 <!-- la partie du livre -->
 
+<h1 class="text-center">Livres</h1>
     <div id="livres" class="container-fluid my-5 py-5 ">
-        <h2 class="text-center">Livres</h2>
         <div class="container">
+
 
             <div class="row text-center " style="display: flex; flex-wrap: wrap; gap:2rem;" >
                 @foreach ($livres as $livre)
-
-                <div  style= "width: 22.1rem; height: 24.5rem;" >
-                    <div class="card h-100" style="backgrounf:#f5f5dc;">
-                        <img style="width: 22rem; height: 15rem; object-fit:cover; backgrounf:#f5f5dc;" src="{{$livre->image}}"  alt="Book 3">
+                <div  style= "width: 22.1rem; height: 26.5rem;" >
+                    <div class="card h-100" style="background:#f5f5dc;">
+                        <img style="width: 22rem; height: 15rem; object-fit:cover; background:#f5f5dc;" src="{{$livre->image}}"  alt="Book 3">
                         <span class="badge rounded-1 text-light "style="position: relative; font-size:1rem;  display:flex; justify-self: start; margin:-1.8rem 1rem 1rem 0.5rem; background-color:#5a4a3b; padding: 0.2rem 0.5rem; height: auto; width: 6rem;" >{{$livre->disponible}}</span>
                         <div class="card-body" style="">
                             <h5 class="card-title">{{$livre->titre}}</h5>
-                            <p class="card-text">{{$livre->description}} </p>
+
+                            <p>{{ Illuminate\Support\Str::limit($livre['description'], 70) }}</p>
                             <a href="/details/{{$livre->id}}"> <i class="fa-solid fa-circle-info" style="z-index: 1000; color:#3b2a1a;font-size:2rem; float: right;"></i></a>
 
                         </div>
@@ -111,15 +126,18 @@
     </div>
 
     <!-- le partie des catégories -->
-    <h2 class="text-center">Catégories</h2>
+
     <div class="container">
+        <h2 class="text-center">Catégories</h2>
     <div class="container-fluid my-5 py-5" style="display: flex; flex-wrap: wrap; gap:2rem; align-items:center;" >
-        @foreach ($categories as $categorie)
-        <div class="" style="width: 21rem; ">
-            <div class="card custom-card">
+
+           @foreach ($categories as $categorie)
+        <div class="" style="width: 21rem;background: ">
+            <div class="card custom-card" style="backgound-color:#f5f5dc;">
                 <div class="card-body">
                     <h4 class="card-title">{{ $categorie->libelle }}</h4>
-                    <p class="card-text">{{ $categorie->description }}</p>
+
+                    <p>{{ Illuminate\Support\Str::limit($categorie['description'], 100) }}</p>
                 </div>
             </div>
         </div>
@@ -128,15 +146,17 @@
    </div>
 
        <!-- le partie des catégories -->
-       <h2 class="text-center">Rayons</h2>
+
        <div class="container">
+        <h2 class="text-center">Rayons</h2>
        <div class="container-fluid my-5 py-5" style="display: flex; flex-wrap: wrap; gap:2rem; align-items:center;" >
-           @foreach ($rayons as $rayon)
+
+        @foreach ($rayons as $rayon)
            <div class="" style="width: 21rem; ">
                <div class="card custom-card">
                    <div class="card-body">
                        <h4 class="card-title">{{ $rayon->libelle }}</h4>
-                       <p class="card-text">{{ $rayon->partie }}</p>
+                       <p>{{ Illuminate\Support\Str::limit($rayon['partie'], 70) }}</p>
                    </div>
                </div>
            </div>
@@ -146,13 +166,7 @@
 
 
 
-   <div style="position: relative; width: 100%; height: 0; padding-top: 33.3333%;
-   padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);overflow: hidden;
-    will-change: transform;">
-    <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-      src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGHzLu0rBI&#x2F;zbocI5REj7mK9CJ1R4JuIQ&#x2F;view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-    </iframe>
-  </div>
+
    </div>
 
    <div class="" style="text-align: center; background:#3b2a1a; color:#f5f5dc;padding:0.8rem;">

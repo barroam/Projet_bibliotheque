@@ -19,7 +19,6 @@ class RayonController extends Controller
             // Définition des messages de validation personnalisés par attribut
     $messages = [
         'id.exists' => 'Le rayon sélectionné n\'existe pas.',
-
         'libelle.required' => 'Le champ Libellé est requis.',
         'libelle.string' => 'Le champ Libellé doit être une chaîne de caractères.',
         'libelle.max' => 'Le champ Libellé ne peut pas dépasser :max caractères.',

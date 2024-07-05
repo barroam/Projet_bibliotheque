@@ -63,7 +63,7 @@
                 <div class="col-md-5">
                     <img src="{{$livre->image}}" class="img-fluid rounded-start" alt="{{$livre->titre}}">
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7" style="font-size: 1.1rem">
                     <div class="card-body">
                         <h5 class="card-title mb-0">{{$livre->titre}}</h5>
                         <span class="badge bg-dark text-light">{{$livre->disponible }}</span>
@@ -71,33 +71,27 @@
                         <p class="card-text"><strong>ISBN:</strong> {{$livre->isbn}}</p>
                         <p class="card-text"><strong>Auteur:</strong> {{$livre->auteur}}</p>
                         <p class="card-text"><strong>Editeur:</strong> {{$livre->editeur}}</p>
-
-
-
                             <p class="card-text"><strong>Catégorie:</strong> {{$livre->categorie->libelle }}</p>
-
-
-
                             <p class="card-text"><strong>Rayon:</strong> {{$livre->rayon->libelle}}</p>
-
-
                         <hr class="my-2">
                     </div>
                 </div>
             </div>
             <div class=" m-2">
-                <p class="card-text">{{$livre->description}}</p>
+                <div class=" m-2">
+                    <h5 style="margin: 1.5rem" class="card-text">{{$livre->description}}</h5>
+                </div>
             </div>
-            
+
 
         </div>
-
-
-
-
-
    </div>
+</div>
+   <div class="" style="text-align: center; background:#3b2a1a; color:#f5f5dc;padding:0.8rem; margin-top:5rem;">
+    <p>&copy; 2024 Livram Tous droits réservés.</p>
+    <h6 style="color: rgb(183, 176, 176);">by M<span style="color:#f5f5dc;">BARRO</span>DI</h6>
 
+</div>
 <style>
      .custom-card {
             background-color: #f5f5dc; /* Couleur de fond beige */

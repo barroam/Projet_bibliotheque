@@ -54,60 +54,55 @@
         </div>
     </nav>
 
-   <div class="container d-flex flex-wrap " style="" >
-    @if(session('livre'))
-    <div class="alert alert-success">
-        {{ session('livre') }}
-    </div>
-    @endif
-    <div class="container col-12 " style="margin-top:7.2rem; ">
-        @foreach ($livres as $livre)
-        <div class="card mt-3 border-0 shadow " style="background-color: #f5f5dc; margin-bottom:6rem;">
-            <div class="row g-0">
-                <div class="col-md-5">
-                    <img src="{{$livre->image}}" class="img-fluid rounded-start" alt="{{$livre->titre}}">
-                </div>
-                <div class="col-md-7" style="font-size: 1.25rem">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">{{$livre->titre}}</h5>
-                        <span class="badge bg-dark text-light">{{$livre->disponible }}</span>
-                        <hr class="my-2">
-                        <p class="card-text"><strong>ISBN:</strong> {{$livre->isbn}}</p>
-                        <p class="card-text"><strong>Auteur:</strong> {{$livre->auteur}}</p>
-                        <p class="card-text"><strong>Editeur:</strong> {{$livre->editeur}}</p>
-                        @foreach($categories as $categorie)
-                        @if($categorie->id == $livre->categorie_id)
-                            <p class="card-text"><strong>Catégorie:</strong> {{$categorie->libelle }}</p>
-                        @endif
-                        @endforeach
-                        @foreach($rayons as $rayon)
-                        @if($rayon->id == $livre->rayon_id)
-                            <p class="card-text"><strong>Rayon:</strong> {{$rayon->libelle}}</p>
-                        @endif
-                        @endforeach
-                        <hr class="my-2">
+
+    <div class="container">
+        <h1>Résultats de recherche pour "{{ $query }}"</h1>
+
+        @if($livres->isEmpty())
+            <p>Aucun résultat trouvé.</p>
+        @else
+            <div class="row">
+                @foreach($livres as $livre)
+                <div class="container col-12" style="margin-top: 5.2rem;">
+                    <div class="card mt-3 border-0 shadow" style="background-color: #f5f5dc;">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <img src="{{$livre->image}}" class="img-fluid rounded-start" alt="{{$livre->titre}}">
+                            </div>
+                            <div class="col-md-7" style="font-size: 1.1rem">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-0">{{$livre->titre}}</h5>
+                                    <span class="badge bg-dark text-light">{{$livre->disponible}}</span>
+                                    <hr class="my-2">
+                                    <p class="card-text"><strong>ISBN:</strong> {{$livre->isbn}}</p>
+                                    <p class="card-text"><strong>Auteur:</strong> {{$livre->auteur}}</p>
+                                    <p class="card-text"><strong>Editeur:</strong> {{$livre->editeur}}</p>
+                                    <p class="card-text"><strong>Catégorie:</strong> {{$livre->categorie->libelle}}</p>
+                                    <p class="card-text"><strong>Rayon:</strong> {{$livre->rayon->libelle}}</p>
+                                    <hr class="my-2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-2">
+                            <div class="m-2">
+                                <h5 style="margin: 1.5rem;" class="card-text">{{$livre->description}}</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class=" m-2">
-                <p style="margin: 1.3rem; font-size:1.5rem;">{{ Illuminate\Support\Str::limit($livre['description'], 200) }}</p>
-            </div>
-            <div class="card-footer">
-                @if (Auth::check())
-                <a href="/livre_modifie/{{$livre->id}}" class="btn btn-dark">Modifier</a>
-                <a href="/supprime_L/{{$livre->id}}" class="btn btn-dark">Supprimer</a>
-                @endif
-            </div>
-        </div>
-        @endforeach
-   </div>
-   </div>
 
-   <div class="" style="text-align: center; background:#3b2a1a; color:#f5f5dc;padding:0.8rem; margin-top:5rem;">
-    <p>&copy; 2024 Livram Tous droits réservés.</p>
-    <h6 style="color: rgb(183, 176, 176);">by M<span style="color:#f5f5dc;">BARRO</span>DI</h6>
+                @endforeach
+            </div>
+        @endif
+    </div>
 
-</div>
+    <div class="" style="text-align: center; background:#3b2a1a; color:#f5f5dc;padding:0.8rem; margin-top:5rem;">
+        <p>&copy; 2024 Livram Tous droits réservés.</p>
+        <h6 style="color: rgb(183, 176, 176);">by M<span style="color:#f5f5dc;">BARRO</span>DI</h6>
+
+    </div>
+
+
 <style>
      .custom-card {
             background-color: #f5f5dc; /* Couleur de fond beige */
@@ -147,6 +142,5 @@
         }
 
 </style>
-
 </body>
 </html>

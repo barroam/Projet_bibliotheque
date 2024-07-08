@@ -79,15 +79,14 @@
             <a class="nav-link" style="font-size: 1.2rem; margin-top:0.5rem;" href="#"><i class="fas fa-tachometer-alt"></i> <strong> Dashboard</strong> </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/list_livre"><i class="fas fa-book"></i> Livres</a>
+            <a class="nav-link" href="{{route('list_livre')}}"><i class="fas fa-book"></i> Livres</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/list_categorie"><i class="fas fa-th-list"></i> Categories</a>
+            <a class="nav-link" href="{{route('list_categorie')}}"><i class="fas fa-th-list"></i> Categories</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/list_rayon"><i class="fas fa-store"></i> Rayons</a>
+            <a class="nav-link" href="{{route('list_rayon')}}"><i class="fas fa-store"></i> Rayons</a>
         </li>
-
     </ul>
 </div>
 

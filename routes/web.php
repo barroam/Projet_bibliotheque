@@ -66,9 +66,9 @@ use App\Http\Controllers\CategorieController;
 
 Route::get('/search',[LivreController::class, 'search'])->name('search');
 
-Route::get('list_livre',[LivreController::class,'list_livre'])->middleware('auth');
-Route::get('list_rayon',[RayonController::class,'list_rayon'])->middleware('auth');
-Route::get('list_categorie',[CategorieController::class,'list_categorie'])->middleware('auth');
+Route::get('list_livre',[LivreController::class,'list_livre'])->name('list_livre')->middleware('auth');
+Route::get('list_rayon',[RayonController::class,'list_rayon'])->name('list_rayon')->middleware('auth');
+Route::get('list_categorie',[CategorieController::class,'list_categorie'])->name('list_categorie')->middleware('auth');
 
 }
 

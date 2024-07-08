@@ -76,28 +76,29 @@
 
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a class="nav-link" style="font-size: 1.2rem; margin-top:0.5rem;" href="#"><i class="fas fa-tachometer-alt"></i> <strong> Dashboard</strong> </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/livre"><i class="fas fa-book"></i> Livres</a>
+            <a class="nav-link" href="/list_livre"><i class="fas fa-book"></i> Livres</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/categorie"><i class="fas fa-th-list"></i> Categories</a>
+            <a class="nav-link" href="/list_categorie"><i class="fas fa-th-list"></i> Categories</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/rayon"><i class="fas fa-store"></i> Rayons</a>
+            <a class="nav-link" href="/list_rayon"><i class="fas fa-store"></i> Rayons</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/login"><i class="fas fa-cogs"></i> Paramètres</a>
-        </li>
+
     </ul>
 </div>
 
     <!-- conteneur element-->
 <div class="box2">
+
     @if ($errors->any())
-    <div class="alert text-light" style="display: flex;position:fixed;z-index:1000; width:70%; background:#3b2a1acf;
-    " >
+    <div class="alert text-light" style="display: flex;position:fixed;z-index:1000; width:70%; background:#5a4a3b;border:0.1rem solid #000; " >
+
+        <div ><a href="/profil" style="float:right; position:fixed; margin-left:64%; text-decoration:none; color:#fff; font-weight:bolder;font-size:1.3rem; ">OK</a>
+            </div>
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -105,6 +106,7 @@
         </ul>
     </div>
     @endif
+
     <div class="container col-6 border border-secondary-subtle p-2">
         <div class="custom-div">
             <h5>Ajouter un livre</h5>
@@ -154,7 +156,7 @@
                                 <textarea class="form-control" id="description" name="description" rows="3" placeholder="Entrez la description"></textarea>
                             </div>
 
-                            <div class="d-flex justify-content-between gap-1">
+                            <div class="d-flex justify-content-between gap-1" >
                                 <div class="form-group">
                                     <label for="rayon_id">Rayon</label>
                                     <select class="form-control" id="rayon_id" name="rayon_id" required>
@@ -177,7 +179,7 @@
                         </form>
 
         </div>
-   <div class="col-5">
+   <div class="col-5" style="margin-top: -3rem;">
     <div class="container mt-5 border border-secondary-subtle  p-2">
         <div class="custom-div">
             <h5>Ajouter une catégorie </h5>

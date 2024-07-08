@@ -71,6 +71,7 @@
                             </div>
                             <div class="col-md-7" style="font-size: 1.1rem">
                                 <div class="card-body">
+                                    <button class="btn btn-custom mb-3" style="float: right; " onclick="goBack()"><i class="fas fa-arrow-left" style="color:#3b2a1a; font-size:1.5rem;"></i> </button>
                                     <h5 class="card-title mb-0">{{$livre->titre}}</h5>
                                     <span class="badge bg-dark text-light">{{$livre->disponible}}</span>
                                     <hr class="my-2">
@@ -103,6 +104,11 @@
     </div>
 
 
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 <style>
      .custom-card {
             background-color: #f5f5dc; /* Couleur de fond beige */

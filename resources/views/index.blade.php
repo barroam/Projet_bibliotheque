@@ -80,14 +80,12 @@
         </div>
     </nav>
 
-
     <form action="{{ route('search') }}" method="GET" class="col-4 d-flex justify-content-end p-2  " style="float:right ; gap:0.3rem;">
         <input class="form-control  search-input" type="search" placeholder="Rechercher" aria-label="Search" name="query" required>
         <button class="btn " style="background-color: #f5f5dc" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
     <!-- la banierre -->
     <div class="jumbotron jumbotron-fluid text-center banner" style="background-color: #5a4a3b;border-bottom:none; ">
-
         <div style="position: relative; width: 100%; height: 0; padding-top: 33.3333%;
         padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);overflow: hidden;
          will-change: transform;">
@@ -102,8 +100,6 @@
 <h1 class="text-center">Livres</h1>
     <div id="livres" class="container-fluid my-5 py-5 ">
         <div class="container">
-
-
             <div class="row text-center " style="display: flex; flex-wrap: wrap; gap:2rem;" >
                 @foreach ($livres as $livre)
                 <div  style= "width: 22.1rem; height: 26.5rem;" >
@@ -124,7 +120,9 @@
             </div>
         </div>
     </div>
-
+    <div>
+        {{$livres->links()}}
+    </div>
     <!-- le partie des catégories -->
 
     <div class="container">
@@ -144,7 +142,9 @@
         @endforeach
     </div>
    </div>
-
+   <div>
+    {{$categories->links()}}
+   </div>
        <!-- le partie des catégories -->
 
        <div class="container">
@@ -164,7 +164,9 @@
        </div>
       </div>
 
-
+  <div>
+    {{$rayons->links()}}
+  </div>
 
 
    </div>
@@ -212,6 +214,16 @@
         background-color: #3b2a1a;
         color: white;
     }
+    .pagination .page-item.active .page-link {
+            background-color: #5a4a3b;
+            border-color: #5a4a3b;
+        }
+        .pagination .page-link {
+            color: #5a4a3b;
+        }
+        .pagination .page-link:hover {
+            color: #3b2a1a;
+        }
 </style>
 
 <!-- Lien vers les scripts JavaScript de Bootstrap -->

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-
             color: #5a4a3b;
         }
         .card {
@@ -46,11 +45,18 @@
             background-color: #3b2a1a;
             border-color: #3b2a1a;
         }
+        .custom-div {
+            color: white; /* Texte en blanc */
+            background-color: #5a4a3b; /* Couleur de fond marron foncé */
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom" style="border-bottom:solid #3b2a1a; position: fixed; display: flex; width: 100%; z-index: 1000; top: 0;" >
-        <a class="navbar-brand" style="color: #3b2a1a; font-weight: 600 ;margin-top:0; " href="#">Livram</a>
+    <nav class="navbar navbar-expand-lg navbar-custom" style="border-bottom:solid #3b2a1a; position: fixed; display: flex; width: 100%; z-index: 1000; top: 0;">
+        <a class="navbar-brand" style="color: #3b2a1a; font-weight: 600; margin-top:0;" href="#">Livram</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -59,7 +65,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Accueil</a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" href="/livre">Livres</a>
                 </li>
@@ -78,42 +83,44 @@
             @if (Auth::guest())
             <a class="btn btn-dark ml-3" href="/login">Connexion</a>
             @endif
-
             @if(Auth::check())
-            <form action="{{route('logout')}}" method="POST" role="search">
+            <form action="{{ route('logout') }}" method="POST" role="search">
             @csrf
             @method('DELETE')
-            <button class="btn btn-dark ml-3" type="submit" >Deconnexion</button>
+            <button class="btn btn-dark ml-3" type="submit">Deconnexion</button>
             </form>
-          @endif
+            @endif
         </div>
     </nav>
-    <div class="container mt-5">
-        <h1 class="text-center " style="margin-top:5rem">Modifier Rayon</h1>
-        <div class="card p-4">
+
+    <div class="container">
+        <div style="display: flex; height:5rem;"></div>
+
+        <div class="container mt-5 border border-secondary-subtle p-2">
+            <div class="custom-div">
+                <h5>Ajouter un rayon</h5>
+            </div>
+            <br>
             <form action="/modifie_sauvegarde" method="post">
                 @csrf
-                <input type="hidden" name="id" id="id" value="{{$rayon->id}}">
-                <p>ID du rayon : {{$rayon->id}}</p>
                 <div class="form-group">
-                    <label for="libelle">Nom du rayon</label>
-                    <input type="text" class="form-control" name="libelle" id="libelle" value="{{$rayon->libelle}}" required>
+                    <label for="libelle">Nom du Rayon</label>
+                    @if(session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+                    <input type="hidden" name="id" value="{{$rayon->id}}">
+                    <input type="text" class="form-control" name="libelle" id="libelle" placeholder="Entrez le nom du rayon" value="{{$rayon->libelle}}">
                 </div>
                 <div class="form-group">
                     <label for="partie">Direction</label>
-                    <input type="text" class="form-control" name="partie" id="partie" value="{{$rayon->partie}}" required>
+                    <textarea  type="text" class="form-control" name="partie" id="partie" placeholder="Entrez la direction"  rows="10">{{$rayon->partie}}</textarea>
+
                 </div>
-                <button type="submit" class="btn btn-custom mt-3">Envoyer</button>
+                <button type="submit" class="btn btn-dark ml-3">Envoyer</button>
             </form>
         </div>
     </div>
-    <div class="" style="text-align: center; background:#3b2a1a; color:#f5f5dc;padding:0.8rem; margin-top:5rem;">
-        <p>&copy; 2024 Livram Tous droits réservés.</p>
-        <h6 style="color: rgb(183, 176, 176);">by M<span style="color:#f5f5dc;">BARRO</span>DI</h6>
 
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+    <div class="" style="text-align: ce

@@ -10,7 +10,7 @@ use App\Http\Controllers\AuthController;
 class AuthController extends Controller
 {
     public function register (){
-        return view('/livres.register');
+        return view('/auth.register');
     }
     public function registerPost(Request $request){
        $users = new User();
@@ -24,7 +24,7 @@ class AuthController extends Controller
 
     //la route pour la connexion
     public function login(){
-        return view('/livres.login');
+        return view('/auth.login');
     }
 
     //la methode pour ....

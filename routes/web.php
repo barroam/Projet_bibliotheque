@@ -17,7 +17,7 @@ use App\Http\Controllers\CategorieController;
     //la route pour ajouter un livre
     Route::post('/sauvegarde_livre',[LivreController::class,'Ajouter_livres'])->middleware('auth');
     //la route pour modifier livre
-    Route::get('livre_modifie/{id}',[LivreController::class,'modifie_livres']);
+    Route::get('livre_modifie/{id}',[LivreController::class,'modifie_livres'])->middleware('auth');
     //la route pour modifier sauvegarde livre
     Route::post('/modifie_sauvegarde_L/{id}',[LivreController::class,'sauvegarde_modifie_livres']);
     //la route pour la suppresion livre
@@ -31,7 +31,7 @@ use App\Http\Controllers\CategorieController;
     //la route pour ajouter catégorie
     Route::post('/ajout/sauvegarde_categorie',[CategorieController::class,'ajouter_categories'])->middleware('auth');
     //la route pour modifier categorie
-    Route::get('modifie_C/{id}',[CategorieController::class,'modifie_categories']);
+    Route::get('modifie_C/{id}',[CategorieController::class,'modifie_categories'])->middleware('auth');
     //la route pour modifier sauvegarder
     Route::post('/modifie_sauvegarde_c/{id}',[CategorieController::class,'sauvegarde_modife_categories'])->middleware('auth');;
     //la route pour supprimer categorie
@@ -44,7 +44,7 @@ use App\Http\Controllers\CategorieController;
     //la route pour ajouter un rayon
     Route::post('/ajout/sauvegarde',[RayonController::class,'ajouter_rayons'])->middleware('auth');;
     //la route pour modifier un rayon
-    Route::get('modifie_R/{id}',[RayonController::class,'modifie_rayons']);
+    Route::get('modifie_R/{id}',[RayonController::class,'modifie_rayons'])->middleware('auth');
     //la route pour sauvegarder un rayon modifier
     Route::post('/modifie_sauvegarde',[RayonController::class,'sauvegarde_modife_rayons'])->middleware('auth');;
     //la route pour supprimer un rayon
@@ -54,7 +54,7 @@ use App\Http\Controllers\CategorieController;
 
 
  //la route de l'enregistrement d'un admin
- Route::get('/register',[AuthController::class,'register'])->name('register');
+ Route::get('/register',[AuthController::class,'register'])->name('register')->middleware('auth');
 
  Route::post('/register',[AuthController::class,'registerPost'])->name('registers');
 
@@ -66,8 +66,9 @@ use App\Http\Controllers\CategorieController;
 
 Route::get('/search',[LivreController::class, 'search'])->name('search');
 
-
-
+Route::get('list_livre',[LivreController::class,'list_livre'])->middleware('auth');
+Route::get('list_rayon',[RayonController::class,'list_rayon'])->middleware('auth');
+Route::get('list_categorie',[CategorieController::class,'list_categorie'])->middleware('auth');
 
 }
 

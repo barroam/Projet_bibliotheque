@@ -9,10 +9,17 @@ use App\Models\Rayon;
 
 class RayonController extends Controller
 {
+
+
+    public function list_rayon (){
+
+        $rayons = Rayon::paginate(6);
+        return view ('admin.list_rayon',compact('rayons',));
+       }
     public function affiche_rayons (){
 
             $rayons = Rayon::all();
-            return view ('/livres.rayon',compact('rayons',));
+            return view ('rayons.rayon',compact('rayons',));
            }
     // la methode pour ajouter un Rayon
     public function ajouter_rayons( Request $request){
@@ -40,7 +47,7 @@ class RayonController extends Controller
     //la methode pour modifier un rayon
     public function modifie_rayons($id){
          $rayon = Rayon::findorfail($id);
-         return view('livres.modif-rayon',compact('rayon'));
+         return view('rayons.modif-rayon',compact('rayon'));
     }
  //la methode pour enregistrer la modification
     public function sauvegarde_modife_rayons (Request $request) {
@@ -51,17 +58,17 @@ class RayonController extends Controller
     ]);
 
     // Utiliser update pour mettre à jour ou créer le rayon
-       $rayon = Rayon::findOrfail($request->id);
+       $rayon = Rayon::find($request->id);
         $rayon->libelle = $request->libelle ;
         $rayon->partie = $request->partie ;
         $rayon->update();
-    return redirect('/rayon');
+    return redirect('list_rayon');
 }
 
   public function supprime_rayons ($id){
           $rayon = Rayon::find($id);
           $rayon->delete();
-     return redirect ('/rayon');
+     return redirect ()->back();
   }
 
 

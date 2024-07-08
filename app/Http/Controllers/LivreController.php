@@ -11,30 +11,35 @@ use Illuminate\Support\Facades\Auth;
 
 class LivreController extends Controller
 {
+   public function list_livre(){
+    $livres = Livre::paginate(5);
+    $categories = Categorie::all();
+     $rayons = Rayon::all();
+    return view ('admin.list_livre',compact('categories','rayons','livres'));
+   }
+
+
+
+
     //la fonction pour afficher la page d'accueil
     public function accueil (){
-        $livres = Livre::all();
-        $categories = Categorie::all();
-         $rayons = Rayon::all();
-        return view ('livres.index',compact('categories','rayons','livres'));
+        $livres = Livre::paginate(6);
+        $categories = Categorie::paginate(6);
+         $rayons = Rayon::paginate(6);
+        return view ('index',compact('categories','rayons','livres'));
     }
 
-    //la fonction pour afficher la page profil de l'administrateur
-    public function profil(){
-        return view('livres.profil');
-    }
 
-    //la fonction affiche
-
+    //la fonction affiche l'ensemble des données sur le profil
     public function affiche_all (){
     $livres = Livre::all();
        $categories = Categorie::all();
         $rayons = Rayon::all();
-        return view ('/livres.profil',compact('categories','rayons','livres'));
+        return view ('/admin.profil',compact('categories','rayons','livres'));
        }
 
     public function affiche_livres(){
-        $livres = Livre::all();
+        $livres = Livre::paginate(6);
            $categories = Categorie::all();
             $rayons = Rayon::all();
             return view ('/livres.livre',compact('categories','rayons','livres'));
@@ -87,7 +92,7 @@ class LivreController extends Controller
 
         $livres = Livre::create($request->all());
 
-        return redirect ('livre')->with('livre', 'Ajouter avec succès.');
+        return redirect ('list_livre')->with('livre', 'Ajouter avec succès.');
     }
 
     //la  methode pour afficher la modification
@@ -113,7 +118,7 @@ class LivreController extends Controller
         $livre = Livre::find($id);
         $livre->update($request->all());
 
-        return redirect ('livre');
+        return redirect ('list_livre');
     }
     //la methode  pour la suppression
     public function supprime_livres($id){

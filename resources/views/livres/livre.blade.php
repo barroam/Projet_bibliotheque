@@ -54,53 +54,39 @@
         </div>
     </nav>
 
-   <div class="container d-flex flex-wrap " style="" >
+   <div class=" d-flex flex-wrap " style="" >
     @if(session('livre'))
     <div class="alert alert-success">
         {{ session('livre') }}
     </div>
     @endif
-    <div class="container col-12 " style="margin-top:7.2rem; ">
-        @foreach ($livres as $livre)
-        <div class="card mt-3 border-0 shadow " style="background-color: #f5f5dc; margin-bottom:6rem;">
-            <div class="row g-0">
-                <div class="col-md-5">
-                    <img src="{{$livre->image}}" class="img-fluid rounded-start" alt="{{$livre->titre}}">
-                </div>
-                <div class="col-md-7" style="font-size: 1.25rem">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">{{$livre->titre}}</h5>
-                        <span class="badge bg-dark text-light">{{$livre->disponible }}</span>
-                        <hr class="my-2">
-                        <p class="card-text"><strong>ISBN:</strong> {{$livre->isbn}}</p>
-                        <p class="card-text"><strong>Auteur:</strong> {{$livre->auteur}}</p>
-                        <p class="card-text"><strong>Editeur:</strong> {{$livre->editeur}}</p>
-                        @foreach($categories as $categorie)
-                        @if($categorie->id == $livre->categorie_id)
-                            <p class="card-text"><strong>Catégorie:</strong> {{$categorie->libelle }}</p>
-                        @endif
-                        @endforeach
-                        @foreach($rayons as $rayon)
-                        @if($rayon->id == $livre->rayon_id)
-                            <p class="card-text"><strong>Rayon:</strong> {{$rayon->libelle}}</p>
-                        @endif
-                        @endforeach
-                        <hr class="my-2">
+
+        <div id="livres" class="container-fluid my-5 py-5 ">
+            <h1 class="text-center">Liste des livres</h1>
+            <div class="container">
+                <div class="row text-center " style="display: flex; flex-wrap: wrap; gap:2rem;" >
+                    @foreach ($livres as $livre)
+                    <div  style= "width: 22.1rem; height: 26.5rem;" >
+                        <div class="card h-100" style="background:#f5f5dc;">
+                            <img style="width: 22rem; height: 15rem; object-fit:cover; background:#f5f5dc;" src="{{$livre->image}}"  alt="Book 3">
+                            <span class="badge rounded-1 text-light "style="position: relative; font-size:1rem;  display:flex; justify-self: start; margin:-1.8rem 1rem 1rem 0.5rem; background-color:#5a4a3b; padding: 0.2rem 0.5rem; height: auto; width: 6rem;" >{{$livre->disponible}}</span>
+                            <div class="card-body" style="">
+                                <h5 class="card-title">{{$livre->titre}}</h5>
+
+                                <p>{{ Illuminate\Support\Str::limit($livre['description'], 70) }}</p>
+                                <a href="/details/{{$livre->id}}"> <i class="fa-solid fa-circle-info" style="z-index: 1000; color:#3b2a1a;font-size:2rem; float: right;"></i></a>
+
+                            </div>
+                        </div>
+
                     </div>
+                    @endforeach
                 </div>
             </div>
-            <div class=" m-2">
-                <p style="margin: 1.3rem; font-size:1.5rem;">{{ Illuminate\Support\Str::limit($livre['description'], 200) }}</p>
-            </div>
-            <div class="card-footer">
-                @if (Auth::check())
-                <a href="/livre_modifie/{{$livre->id}}" class="btn btn-dark">Modifier</a>
-                <a href="/supprime_L/{{$livre->id}}" class="btn btn-dark">Supprimer</a>
-                @endif
+            <div class="m-4" >
+                {{$livres->links()}}
             </div>
         </div>
-        @endforeach
-   </div>
    </div>
 
    <div class="" style="text-align: center; background:#3b2a1a; color:#f5f5dc;padding:0.8rem; margin-top:5rem;">
@@ -144,6 +130,16 @@
         .navbar-custom .btn-dark:hover {
             background-color: #3b2a1a;
             border-color: #3b2a1a;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #5a4a3b;
+            border-color: #5a4a3b;
+        }
+        .pagination .page-link {
+            color: #5a4a3b;
+        }
+        .pagination .page-link:hover {
+            color: #3b2a1a;
         }
 
 </style>

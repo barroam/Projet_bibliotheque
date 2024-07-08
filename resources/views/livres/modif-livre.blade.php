@@ -7,6 +7,37 @@
     <!-- Lien vers Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
+.custom-div {
+            color: white; /* Texte en marron foncé */
+            background-color:#5a4a3b; /* Couleur de fond beige */
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .custom-div .nav-link {
+            color: #5a4a3b;
+        }
+        .custom-div .nav-link:hover {
+            color: #3b2a1a;
+        }
+             .navbar-custom {
+            background-color: #f5f5dc;
+        }
+        .navbar-custom .nav-link {
+            color: #5a4a3b;
+        }
+        .navbar-custom .nav-link:hover {
+            color: #3b2a1a;
+        }
+        .navbar-custom .btn-dark {
+            background-color: #5a4a3b;
+            border-color: #5a4a3b;
+        }
+        .navbar-custom .btn-dark:hover {
+            background-color: #3b2a1a;
+            border-color: #3b2a1a;
+        }
         body {
 
             color: #5a4a3b;
@@ -86,57 +117,82 @@
             @endif
         </div>
     </nav>
-    <div class="container mt-5">
-        <div class="form-container">
-            <h2 style="margin-top:3rem">Modifier Livre</h2>
-            <form action="/modifie_sauvegarde_L/{{$livre->id}}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="titre">Titre</label>
-                    <input type="text" class="form-control" name="titre" id="titre" value="{{$livre->titre}}" required>
-                </div>
-                <div class="form-group">
-                    <label for="isbn">ISBN</label>
-                    <input type="text" class="form-control" name="isbn" id="isbn" value="{{$livre->isbn}}" required>
-                </div>
-                <div class="form-group">
-                    <label for="auteur">Auteur</label>
-                    <input type="text" class="form-control" name="auteur" id="auteur" value="{{$livre->auteur}}" required>
-                </div>
-                <div class="form-group">
-                    <label for="editeur">Éditeur</label>
-                    <input type="text" class="form-control" name="editeur" id="editeur" value="{{$livre->editeur}}" required>
-                </div>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" name="disponible" id="disponible" value="disponible" @if($livre->disponible) checked @endif>
-                    <label class="form-check-label" for="disponible">Disponible</label>
-                </div>
-                <div class="form-group">
-                    <label for="image">Image</label>
-                    <input type="text" class="form-control" name="image" id="image" value="{{$livre->image}}" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" name="description" id="description" cols="30" rows="10" required>{{$livre->description}}</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="rayon_id">Rayon</label>
-                    <select class="form-control" id="rayon_id" name="rayon_id" required>
-                        @foreach($rayons as $rayon)
-                            <option value="{{ $rayon->id }}" @if($rayon->id == $livre->rayon_id) selected @endif>{{ $rayon->libelle }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="categorie_id">Catégorie</label>
-                    <select class="form-control" id="categorie_id" name="categorie_id" required>
-                        @foreach($categories as $categorie)
-                            <option value="{{ $categorie->id }}" @if($categorie->id == $livre->categorie_id) selected @endif>{{ $categorie->libelle }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-custom">Envoyer</button>
-            </form>
+
+    <div class="container ">
+ <div style="display: flex; height:5rem;" >
+
+   </div>
+    <div class="container col-8 border border-secondary-subtle p-2">
+        <div class="custom-div">
+            <h5>Ajouter un livre</h5>
+        </div>
+<br>
+
+
+                        <form action="/modifie_sauvegarde_L/{{{$livre->id}}}" method="POST" class="container ">
+
+                            @csrf
+                            <div class="d-flex justify-content-between gap-1">
+                                <div class="form-group">
+                                    <label for="titre">Titre</label>
+                                    <input type="text" class="form-control" id="titre" name="titre" placeholder="Entrez le titre" value="{{$livre->titre}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="isbn">ISBN</label>
+                                    <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Entrez l'ISBN" value="{{$livre->isbn}}">
+                                </div>
+
+                            </div>
+
+                            <div class="d-flex justify-content-between gap-1">
+                                <div class="form-group">
+                                    <label for="auteur">Auteur</label>
+                                    <input type="text" class="form-control" id="auteur" name="auteur" placeholder="Entrez l'auteur" value="{{$livre->auteur}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editeur">Editeur</label>
+                                    <input type="text" class="form-control" id="editeur" name="editeur" placeholder="Entrez l'éditeur" value="{{$livre->editeur}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="disponible" id="disponible" value="disponible"  >
+                                    <label class="form-check-label" for="disponible">Disponible</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="text" class="form-control" id="image" name="image"  placeholder="Entrez le lien de l'image" value="{{$livre->image}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="6" placeholder="Entrez la description">{{$livre->description}}</textarea>
+                            </div>
+
+                            <div class="d-flex justify-content-between gap-1" >
+                                <div class="form-group">
+                                    <label for="rayon_id">Rayon</label>
+                                    <select class="form-control" id="rayon_id" name="rayon_id" required>
+                                        @foreach($rayons as $rayon)
+                                        <option value="{{ $rayon->id }}">{{ $rayon->libelle }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="categorie_id">Catégorie</label>
+                                    <select class="form-control" id="categorie_id" name="categorie_id" required>
+                                        @foreach($categories as $categorie)
+                                        <option value="{{ $categorie->id }}">{{ $categorie->libelle }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-dark ml-3">Envoyer</button>
+                        </form>
+
         </div>
     </div>
     <div class="" style="text-align: center; background:#3b2a1a; color:#f5f5dc;padding:0.8rem; margin-top:5rem;">

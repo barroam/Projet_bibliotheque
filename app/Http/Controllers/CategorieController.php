@@ -15,39 +15,36 @@ class CategorieController extends Controller
         ]);
 
         $categories = Categorie::create($request->all());
-        return redirect ('categorie');
+        return redirect ('list_categorie');
     }
    // la methode pour affiche la vue modification et son id
     public function modifie_categories($id){
         $categorie = Categorie::findorfail($id);
-      return view ('/livres.modif-categorie',compact('categorie'));
+      return view ('categories.modif-categorie',compact('categorie'));
     }
 
-    // la methode pour enregistrer la modification d'une categorie
-//     public function sauvegarde_modife_categories(Request $request , Categorie $categorie){
-//         // Pour la validation
 
-//         //Pour l'stockage et l'enregistrement dans la base de donnée
-//         $categorie->libelle = $request->libelle;
-//      $categorie->description = $request->description;
-//      $categorie->update();
-//         return redirect('profil');
-//  }
    public function sauvegarde_modife_categories (Request $request ,$id) {
    $categorie = Categorie::find($id);
     $categorie->update($request->all());
-    return redirect('/categorie');
+    return redirect('/list_categorie');
    }
 
    //la methode pour supprimer une categorie
    public function supprime_categories($id){
      $categorie = Categorie::find($id);
      $categorie->delete();
-     return redirect('/categorie');
+     return redirect()->back();
    }
+   
     public function affiche_categories(){
         $categories = Categorie::all();
-        return view ('/livres.categorie',compact('categories',));
+        return view ('/categories.categorie',compact('categories',));
+    }
+
+    public function list_categorie(){
+    $categories = Categorie::paginate(6);
+    return view ('/admin.list_categorie',compact('categories',));
     }
 
 

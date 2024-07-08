@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -29,7 +33,7 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom" style="border-bottom:solid #3b2a1a; position: fixed; display: flex; width: 100%; z-index: 1000; " >
+    <nav class="navbar navbar-expand-lg navbar-custom" style="border-bottom:solid #3b2a1a; position: fixed; display: flex; width: 100%; z-index: 1000;" >
         <a class="navbar-brand" style="color: #3b2a1a; font-weight: 600 ; " href="#">Livram</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -82,39 +86,24 @@
                 display: inline-block;
             }
         </style>
-
-
-
-
-
-
-
-                <h1 class="custom-title">Catégories</h1>
+                <h1 class="custom-title">Rayons</h1>
                 <div class="row">
-                    @foreach ($categories as $categorie)
+                    @foreach ($rayons as $rayon)
                     <div class="col-md-4">
                         <div class="card custom-card">
                             <div class="card-body">
-                                <h4 class="card-title">{{ $categorie->libelle }}</h4>
-                                <p class="card-text">{{ $categorie->description }}</p>
-                            </div>
-                            <div class="card-footer">
-                                @if (Auth::check())
-                                <a href="/modifie_C/{{ $categorie->id }}" class="btn btn-sm">Modifier</a>
-                                <a href="/supprime_C/{{ $categorie->id }}" class="btn btn-sm">Supprimer</a>
-                                @endif
+                                <h4 class="card-title">{{ $rayon->libelle }}</h4>
+                                <p class="card-text">{{ $rayon->partie }}</p>
                             </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
    </div>
-</div>
-   <div class="" style="text-align: center; background:#3b2a1a; color:#f5f5dc;padding:0.8rem; margin-top:5rem;">
-    <p>&copy; 2024 Livram Tous droits réservés.</p>
-    <h6 style="color: rgb(183, 176, 176);">by M<span style="color:#f5f5dc;">BARRO</span>DI</h6>
 
-</div>
+
+
+
    <style>
     .custom-title {
         font-family: 'Arial', sans-serif;
@@ -153,7 +142,13 @@
         color: white;
     }
 </style>
+</div>
 
+<div class="" style="text-align: center; background:#3b2a1a; color:#f5f5dc;padding:0.8rem; margin-top:5rem;">
+    <p>&copy; 2024 Livram Tous droits réservés.</p>
+    <h6 style="color: rgb(183, 176, 176);">by M<span style="color:#f5f5dc;">BARRO</span>DI</h6>
+
+</div>
 <!-- Lien vers les scripts JavaScript de Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
